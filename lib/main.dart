@@ -131,12 +131,14 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            key: const ValueKey('Increment'),
             onPressed: _incrementCounter,
             tooltip: 'Increment',
             child: const Icon(Icons.add),
             ), // This trailing comma makes auto-formatting nicer for build methods.
             const SizedBox(height: 16),
               FloatingActionButton(
+                key: const ValueKey('Decrement'),
                 onPressed: _decrementCounter,
                 tooltip: 'Decrement',
                 child: const Icon(Icons.remove),
@@ -144,6 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 16), // Отступ между кнопками
           // Новая кнопка для сброса
           FloatingActionButton(
+            key: const ValueKey('Refresh'),
             onPressed: _resetCounter,
             tooltip: 'Reset',
             child: const Icon(Icons.refresh),
