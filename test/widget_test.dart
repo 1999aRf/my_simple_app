@@ -8,24 +8,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:my_simple_app/main.dart';
 import 'package:my_simple_app/my_app.dart';
+import 'package:my_simple_app/my_home_page.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  await tester.pumpWidget(const MaterialApp(home: MyHomePage(title: 'Counter Test')));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    final Finder incrementButton = find.byKey(const ValueKey('increment_button'));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.tap(incrementButton);
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+  });
+
+  testWidgets('Counter decrements smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: MyHomePage(title: 'Counter Test')));
+
+    final Finder decrementButton = find.byKey(const ValueKey('decrement_button'));
+
+    await tester.tap(decrementButton);
+    await tester.pump();
+
+    expect(find.text('-1'), findsOneWidget);
+  });
+
+  testWidgets('Counter reset smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: MyHomePage(title: 'Counter Test')));
+
+    final Finder incrementButton = find.byKey(const ValueKey('increment_button'));
+    final Finder resetButton = find.byKey(const ValueKey('reset_button'));
+
+    await tester.tap(incrementButton);
+    await tester.pump();
+    await tester.tap(resetButton);
+    await tester.pump();
+
+    expect(find.text('0'), findsOneWidget);
   });
 }
